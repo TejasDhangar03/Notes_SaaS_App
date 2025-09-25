@@ -25,7 +25,6 @@ A **multi-tenant Notes application** that allows multiple companies (tenants) to
   username:user@acme.test, password:password
   username:admin@globex.test, password:password
   username:user@globex.test, password:password
-
   ```
 
 ### Subscription & Feature Limits
@@ -177,7 +176,7 @@ Remove comment in app.js so app can listan port
 ## 🔹 Deployment
 
 * Both **frontend and backend hosted on Vercel**.
-* Link **[Draw.io](https://notes-saas-app-omega.vercel.app/)**
+* Link **[Draw.io](notes-saas-app-omega.vercel.app)**
 * Backend supports **CORS** for API calls from frontend.
 * Health endpoint:
 
@@ -204,7 +203,6 @@ GET /health → { "status": "ok" }
 
 ## 🔹 Design (Draw.io)
 
-> Attach your Draw.io designs/screenshots here to visualize **UI designs**.
 * Link [Draw.io](https://drive.google.com/drive/folders/1yD3Bd7sv_FOVAZmaDY6E5oUVlBI-1PwP?usp=drive_link)
 * ![alt text](image.png)
 * ![alt text](image-1.png)
