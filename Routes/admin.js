@@ -30,7 +30,7 @@ async function sendMail(sendto) {
 }
 
 admin.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/HTML/admin.HTML"));
+    res.sendFile(path.join(__dirname, "../public/HTML/admin.html"));
 });
 
 admin.post('/invite', async (req, res) => {
