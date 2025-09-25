@@ -76,6 +76,8 @@ app.use('/register', register);
 app.use('/member',auth, members);
 app.use('/admin', auth,roleCheck("admin"), admin)
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+export default app;
