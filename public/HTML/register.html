@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            margin: 0px;
+            height: 100vh;
+        }
+
+        .container {
+            border: 2px solid rgb(184, 182, 182);
+            border-radius: 10px;
+            width: 25vw;
+            height: 55vh;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 36px;
+            gap:10px;
+        }
+
+        .container .reg .in {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            padding: 10px;
+        }
+
+        .container .reg {
+            gap:10px;
+            align-items: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container .btn {
+            width: 20px;
+            height: 20px;
+        }
+
+        .container .btn button {
+            align-self: center;
+            padding: 5px;
+            border: none;
+        }
+
+        .container .btn button:hover {
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #cccccd;
+            transition: all 0.5s;
+        }
+
+        @media screen and (max-width: 900px) {
+            .container {
+                width: 80vw;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="reg">
+            <h2>User Registration</h2>
+            <div class="emali in">
+                <label for="email">Enter Email : </label>
+                <input type="text" id="email" placeholder="Email">
+            </div>
+
+            <div class="role in">
+                <label for="role">Select Role : </label>
+
+                <input type="radio" id="role" name="role" value="admin">
+                <label for="role">Admin</label><br>
+
+                <input type="radio" id="role" name="role" value="member">
+                <label for="role">Member</label><br>
+
+            </div>
+            <div class="password in">
+                <label for="password">Enter Password : </label>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+
+            <div class="cnfpass in">
+                <label for="cnfpassword">Confirm Password : </label>
+                <input type="password" id="cnfpassword" placeholder="Confirm Password">
+            </div>
+
+            <div class="tenant in">
+                <label for="tenant_id">Enter Tenant_id : </label>
+                <input type="text" id="tenant_id" placeholder="Enter tenant_id">
+            </div>
+
+        </div>
+        <div class="btn in">
+            <button id="registerBtn">Register</button>
+        </div>
+    </div>
+    <script src="./Scripts/register.js"></script>
+</body>
+
+</html>

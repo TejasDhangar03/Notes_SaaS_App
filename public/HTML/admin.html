@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+
+            font-family: 'Poppins', sans-serif;
+        }
+        nav .navcontainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #e6e7e8;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav .navcontainer .plan {
+            display: flex;
+            gap: 10px;
+        }
+
+        main .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            justify-content: space-between;
+        }
+
+        main .container .invite {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid #d5d5d5;
+            padding: 0px 20px;
+            border-radius: 10px;
+            min-width: 20vw;
+
+        }
+
+        main .container .invite h3 {
+            align-self: center;
+        }
+
+        main .container .invite button {
+            align-self: center;
+            padding: 5px;
+            border: none;
+
+        }
+         main .container .invite a {
+            align-self: center;
+            padding: 5px;
+            border: none;
+
+        }
+
+        main .container .invite button:hover {
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #cccccd;
+            transition: all 0.5s;
+
+        }
+
+        main .container .users {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            min-width: 30vw;
+            padding: 20px;
+        }
+
+        main .container .users .user {
+            display: flex;
+            justify-content: space-between;
+            gap: 150px;
+
+        }
+        main .container .users .userslist{
+            height: 60%;
+            width : 90%;
+            margin: auto;
+            padding : 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="navcontainer">
+            <div class="greet">Welcome Admin</div>
+            <div class="plan">
+                <div class="pln">Plan : Free</div>
+                <div class="remaining"></div>
+                <button id="logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <div class="invite">
+                <h3>Invite New User</h3>
+
+                <div>
+                    <label for="email">Enter Email</label>
+                    <input type="text" id="email" placeholder="Email">
+                </div>
+
+                <div>
+                    <label for="role">Select Role : </label>
+                    <input type="radio" id="role" name="role" value="admin">
+                    <label for="role">Admin</label>
+
+                    <input type="radio" id="role" name="role" value="member">
+                    <label for="role">Member</label>
+
+                </div>
+
+                <div>
+                    <label for="password">Enter Password : </label>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+
+                <div>
+                    <label for="tenant_id">Enter Tenant id : </label>
+                    <input type="text" id="tenant_id" placeholder="Enter tenant_id">
+                </div>
+
+                <button id="registerBtn">Invite</button><br><br>
+            </div>
+            <div class="company invite">
+                <h3>Go To company's Notes</h3>
+                <a href="/member"><button>Dashboard</button></a>
+            </div>
+            <div class="users invite">
+                <h3>Users</h3>
+
+                <div class="userslist">
+                    <!-- <div class="user">
+                        <div>User 1</div>
+                        <div>
+                            <button>Delete</button>
+                        </div>
+                    </div> -->
+                </div>
+                <button id="refresh">Refresh</button>
+
+            </div>
+        </div>
+    </main>
+    <script defer src="./Scripts/admin.js"></script>
+</body>
+
+</html>
