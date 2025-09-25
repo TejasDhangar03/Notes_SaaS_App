@@ -176,7 +176,7 @@ Remove comment in app.js so app can listan port
 ## 🔹 Deployment
 
 * Both **frontend and backend hosted on Vercel**.
-* Link **[Draw.io](notes-saas-app-omega.vercel.app)**
+* Link **[Notes_SaaS_app](notes-saas-app-omega.vercel.app)**
 * Backend supports **CORS** for API calls from frontend.
 * Health endpoint:
 
