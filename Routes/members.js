@@ -23,18 +23,19 @@ members.post("/create", async (req, res) => {
 
     const { content, title } = req.body;
     const { tenant_id, email } = req.user;
-    let plan,count;
-    try{
-        const result=await user.findOne({
-                email:email,
-                tenant_id:tenant_id
-            })
-            plan=result.plan
-            count=result.count;
-            console.log(result)
-    }catch(err){
+    let plan, count;
+    try {
+        const result = await user.findOne({
+            email: email,
+            tenant_id: tenant_id
+        })
+
+        plan = result.plan
+        count = result.count;
+        console.log(result)
+    } catch (err) {
         console.log(err)
-         return res.status(500).json({ message: "Internal Server Error"});
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 
     const obj = {
@@ -43,42 +44,44 @@ members.post("/create", async (req, res) => {
         tenant_id,
         user: email
     };
-    console.log(plan);
 
+    // console.log(plan);
 
-    if (count > 0 && plan=="free") {
+    if (count > 0 && plan == "free") {
         try {
             const newNote = new notes(obj);
             await newNote.save();
-            count=count-1;
-            const result=await user.findOneAndUpdate({
-                email:email,
-                tenant_id:tenant_id
-            },{ $set: {count:count}})
+            count = count - 1;
+            const result = await user.findOneAndUpdate({
+                email: email,
+                tenant_id: tenant_id
+            }, { $set: { count: count } })
             return res.status(200).json({ message: "Note Created Successfully", data: count });
-
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({ message: "Internal Server Error",data:count });
         }
-    } 
-    else if(plan=="pro"){
+        catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: "Internal Server Error", data: count });
+        }
+    }
+    else if (plan == "pro") {
         try {
             const newNote = new notes(obj);
             await newNote.save();
-            count=count-1;
-            const result=await user.findOneAndUpdate({
-                email:email,
-                tenant_id:tenant_id
-            },{ $set: {count:count}})
-            return res.status(200).json({ message: "Note Created Successfully", data: count });
 
-        } catch (err) {
+            count = count - 1;
+            const result = await user.findOneAndUpdate({
+                email: email,
+                tenant_id: tenant_id
+            }, { $set: { count: count } })
+
+            return res.status(200).json({ message: "Note Created Successfully", data: count });
+        }
+        catch (err) {
             console.log(err);
-            return res.status(500).json({ message: "Internal Server Error",data:count });
-        } 
+            return res.status(500).json({ message: "Internal Server Error", data: count });
+        }
     }
-    else if(plan=="free"&&count==0){
+    else if (plan == "free" && count == 0) {
         return res.status(500).json({ message: "Plan expired contact to admin for upgrade then login again" });
     }
 });
@@ -94,11 +97,10 @@ members.get("/notes", async (req, res) => {
     }
 });
 
-members.delete("/remove", async (req, res) => {
-    const id = req.body;
-    console.log(id)
+members.delete("/remove/:id", async (req, res) => {
+    const id = req.params.id;
     try {
-        const result = await notes.findByIdAndDelete(id.id)
+        const result = await notes.findByIdAndDelete(id)
         console.log("deleted")
         res.status(201).json({ message: "Dateted Successfull", data: result })
     }
@@ -108,19 +110,21 @@ members.delete("/remove", async (req, res) => {
     }
 })
 
-members.put("/update", async (req, res) => {
+members.put("/update/:id", async (req, res) => {
+
+    const id = req.params.id
     const body = req.body;
-    console.log(body)
+    // console.log(body)
+
     try {
-        const result = await notes.findByIdAndUpdate(body.id, { title: body.title, content: body.content })
+        const result = await notes.findByIdAndUpdate(id, { title: body.title, content: body.content })
         console.log("data Updated " + body.id)
         res.status(201).json({ message: "Updated data" });
-
-    } catch (err) {
+    }
+    catch (err) {
         console.log(err)
         res.status(500).json({ message: "Internal Server Error" })
     }
-
 })
 
 export default members;

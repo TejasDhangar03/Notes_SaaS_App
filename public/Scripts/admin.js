@@ -18,9 +18,9 @@ registerBtn.addEventListener("click", async (e) => {
             break;
         }
     }
-    console.log({ email, password, tenant_id, role });
+    // console.log({ email, password, tenant_id, role });
 
-    const res = await fetch("http://localhost:5000/admin/invite", {
+    const res = await fetch("/admin/invite", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -38,12 +38,10 @@ registerBtn.addEventListener("click", async (e) => {
         console.log(data);
         window.location.href = "/";
     }
-
-
 });
 
 refresh.addEventListener("click", async (e) => {
-    alert("refresh clicked");
+    alert("refreshed");
     const res = await fetch("/admin/users", {
         method: "GET",
         headers: {
@@ -51,14 +49,15 @@ refresh.addEventListener("click", async (e) => {
         },
         credentials: 'include'
     });
+
     const data = await res.json();
     console.log(data);
 
     let userslist = document.querySelector(".userslist");
-    userslist.innerHTML="";
+    userslist.innerHTML = "";
     for (let i = 0; i < data.length; i++) {
         const userdata = data[i];
-        if(data[i].plan==="free"){
+        if (data[i].plan === "free") {
             userslist.innerHTML += `
                                 <div class="user">
                                     <div>${data[i].email}</div>
@@ -66,7 +65,7 @@ refresh.addEventListener("click", async (e) => {
                                             <button class="update" data-id="${data[i]._id}">Upgrade</button>
                                         </div>
                                 </div>`;
-        }else{
+        } else {
             userslist.innerHTML += `
                                 <div class="user">
                                     <div>${data[i].email}</div>
@@ -79,30 +78,33 @@ refresh.addEventListener("click", async (e) => {
     Array.from(document.querySelectorAll(".update")).forEach((button, index) => {
         button.addEventListener("click", async () => {
             const userId = button.dataset.id;
-            console.log("update user with ID:", userId);
-            const res = await fetch("/admin/premium", {
+            // console.log("update user with ID:", userId);
+            const res = await fetch("/admin/premium:", {
                 method: "PUT",
-                headers: {  
+                headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ id: userId}),  
+                body: JSON.stringify({ id: userId }),
                 credentials: 'include'
             });
+
             if (res.status !== 200) {
                 alert("Update Failed");
                 return;
             }
-            const data = await res.json(); 
+
+            const data = await res.json();
             console.log(data);
+
             alert("Membership Updated Successfully");
             main();
             window.location.reload();
         });
-
     });
 });
 
-window.onload=async()=>{
+window.onload = async () => {
+
     const res = await fetch("/admin/users", {
         method: "GET",
         headers: {
@@ -110,14 +112,16 @@ window.onload=async()=>{
         },
         credentials: 'include'
     });
+
     const data = await res.json();
     console.log(data);
 
     let userslist = document.querySelector(".userslist");
-    userslist.innerHTML="";
+    userslist.innerHTML = "";
+
     for (let i = 0; i < data.length; i++) {
         const userdata = data[i];
-        if(data[i].plan==="free"){
+        if (data[i].plan === "free") {
             userslist.innerHTML += `
                                 <div class="user">
                                     <div>${data[i].email}</div>
@@ -125,7 +129,7 @@ window.onload=async()=>{
                                             <button class="update" data-id="${data[i]._id}">Upgrade</button>
                                         </div>
                                 </div>`;
-        }else{
+        } else {
             userslist.innerHTML += `
                                 <div class="user">
                                     <div>${data[i].email}</div>
@@ -135,58 +139,66 @@ window.onload=async()=>{
                                 </div>`;
         }
     }
+
     Array.from(document.querySelectorAll(".update")).forEach((button, index) => {
         button.addEventListener("click", async () => {
+
             const userId = button.dataset.id;
-            console.log("update user with ID:", userId);
-            const res = await fetch("/admin/premium", {
+            // console.log("update user with ID:", userId);
+
+            const res = await fetch(`/admin/premium/id=${userId}`, {
                 method: "PUT",
-                headers: {  
+                headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ id: userId}),  
+                body: JSON.stringify({ id: userId }),
                 credentials: 'include'
             });
+
             if (res.status !== 200) {
                 alert("Update Failed");
                 return;
             }
-            const data = await res.json(); 
+
+            const data = await res.json();
             console.log(data);
+
             alert("Membership Updated Successfully");
             main();
             window.location.reload();
         });
-
     });
 }
 
 logout.addEventListener("click", async () => {
-    const res = await fetch("http://localhost:5000/logout", {
-        method: "POST",             
+
+    const res = await fetch("/logout", {
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        credentials: 'include'     
-    }); 
+        credentials: 'include'
+    });
+
     if (res.status != 200) {
         alert("Logout Failed");
         return;
-    }  
+    }
+
     alert("Logged out Successfully");
     localStorage.clear();
     window.location.href = "/login";
-}); 
+});
 
-function main(){
+function main() {
     const plan = localStorage.getItem("plan");
     const count = localStorage.getItem("count");
     const email = localStorage.getItem("email");
 
-    document.querySelector(".greet").innerText ="Welcome "+email;
-    document.querySelector(".pln").innerText ="Plan : "+plan;
-    
-    if(plan!="pro"){
+    document.querySelector(".greet").innerText = "Welcome " + email;
+    document.querySelector(".pln").innerText = "Plan : " + plan;
+
+    if (plan != "pro") {
         document.querySelector(".remaining").innerText = (count) + " Notes left";
     }
 }

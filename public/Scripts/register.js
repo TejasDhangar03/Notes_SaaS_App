@@ -6,6 +6,7 @@ registerBtn.addEventListener("click", async (e) => {
     const cnfpassword = document.getElementById("cnfpassword").value;
     const tenant_id = document.getElementById("tenant_id").value;
     const roles = document.getElementsByName("role");
+
     let role
 
     if (!email || !password || !cnfpassword || !tenant_id || !roles) {
@@ -18,15 +19,16 @@ registerBtn.addEventListener("click", async (e) => {
         return;
     }
 
-    for(let i = 0; i < roles.length; i++) {
+    for (let i = 0; i < roles.length; i++) {
         if (roles[i].checked) {
             role = roles[i].value;
             break;
         }
     }
-    console.log({ email, password, tenant_id, role });
 
-    const res = await fetch("http://localhost:5000/register", {
+    // console.log({ email, password, tenant_id, role });
+
+    const res = await fetch("/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -44,6 +46,4 @@ registerBtn.addEventListener("click", async (e) => {
         console.log(data);
         window.location.href = "/";
     }
-
-
 });

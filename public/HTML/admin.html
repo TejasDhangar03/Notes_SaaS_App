@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <style>
-         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
         * {
 
             font-family: 'Poppins', sans-serif;
         }
+
         nav .navcontainer {
             display: flex;
             justify-content: space-between;
@@ -42,7 +43,6 @@
             padding: 0px 20px;
             border-radius: 10px;
             min-width: 20vw;
-
         }
 
         main .container .invite h3 {
@@ -53,13 +53,12 @@
             align-self: center;
             padding: 5px;
             border: none;
-
         }
-         main .container .invite a {
+
+        main .container .invite a {
             align-self: center;
             padding: 5px;
             border: none;
-
         }
 
         main .container .invite button:hover {
@@ -67,7 +66,6 @@
             cursor: pointer;
             background-color: #cccccd;
             transition: all 0.5s;
-
         }
 
         main .container .users {
@@ -82,18 +80,17 @@
             display: flex;
             justify-content: space-between;
             gap: 150px;
-
         }
-        main .container .users .userslist{
+
+        main .container .users .userslist {
             height: 60%;
-            width : 90%;
+            width: 90%;
             margin: auto;
-            padding : 5px;
+            padding: 5px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             overflow-y: auto;
-
         }
     </style>
 </head>
@@ -103,7 +100,7 @@
         <div class="navcontainer">
             <div class="greet">Welcome Admin</div>
             <div class="plan">
-                <div class="pln">Plan : Free</div>
+                <div class="pln"></div>
                 <div class="remaining"></div>
                 <button id="logout">Logout</button>
             </div>

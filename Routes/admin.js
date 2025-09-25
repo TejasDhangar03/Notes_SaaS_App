@@ -29,7 +29,6 @@ async function sendMail(sendto) {
     return 0;
 }
 
-
 admin.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/HTML/admin.HTML"));
 });
@@ -43,11 +42,12 @@ admin.post('/invite', async (req, res) => {
 
 admin.get('/users', async (req, res) => {
     const data = await user.find({ tenant_id: req.user.tenant_id });
-
     res.status(200).json(data);
 });
 
-admin.put('/premium', async (req, res) => {
+admin.put('/premium/:id', async (req, res) => {
+    const uid = req.params.id;
+    console.log(uid + "from req")
     const id = req.body.id;
 
     console.log("Update user with ID:", id);

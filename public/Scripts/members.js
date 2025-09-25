@@ -7,7 +7,7 @@ function main() {
     document.querySelector(".pln").innerText = "Plan : " + plan;
 
     if (plan != "pro") {
-        document.querySelector(".remaining").innerText =count+ " Notes left";
+        document.querySelector(".remaining").innerText = count + " Notes left";
     }
 }
 
@@ -21,23 +21,29 @@ logout.addEventListener("click", async () => {
         },
         credentials: 'include'
     });
+
     if (res.status != 200) {
         alert("Logout Failed");
         return;
     }
+
     alert("Logged out Successfully");
     localStorage.clear();
     window.location.href = "/login";
 });
 
 document.getElementById("create").addEventListener("click", async () => {
+
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
-    console.log(title, content);
+
     if (!title || !content) {
         alert("Please fill all the fields");
         return;
     }
+
+    console.log(title, content);
+
     const res = await fetch("/member/create", {
         method: "POST",
         headers: {
@@ -46,13 +52,16 @@ document.getElementById("create").addEventListener("click", async () => {
         body: JSON.stringify({ title, content }),
         credentials: 'include'
     });
+
     const data1 = await res.json();
     console.log(data1.data)
+
     if (res.status != 200) {
         alert(data1.message);
         return;
     }
-    localStorage.setItem("count",data1.data)
+
+    localStorage.setItem("count", data1.data)
     main()
     alert("Note Created Successfully");
     window.location.reload();
@@ -60,6 +69,7 @@ document.getElementById("create").addEventListener("click", async () => {
 
 window.onload = async () => {
     main();
+
     const res = await fetch("/member/notes", {
         method: "GET",
         headers: {
@@ -67,14 +77,16 @@ window.onload = async () => {
         },
         credentials: 'include'
     });
+
     const data1 = await res.json();
     console.log(data1.data);
+
     if (res.status != 201) {
         alert(data1.message);
         return;
     }
-    const notes = data1.notes;
 
+    const notes = data1.notes;
     const container = document.querySelector(".allnote");
 
     for (let i = 0; i < data1.data.length; i++) {
@@ -90,29 +102,30 @@ window.onload = async () => {
                             </div>
                         </div>
         `
-
     }
     Array.from(document.querySelectorAll(".delete")).forEach((ele) => {
         ele.addEventListener("click", async (e) => {
             console.log(e.target.dataset.id)
 
-            const res = await fetch("/member/remove", {
+            const res = await fetch(`/member/remove/${e.target.dataset.id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ id: e.target.dataset.id}),
+                body: JSON.stringify({ id: e.target.dataset.id }),
                 credentials: 'include'
             });
+
             const data1 = await res.json();
             console.log(data1.data);
+
             if (res.status != 201) {
                 alert(data1.message);
                 return;
             }
+
             alert("Deleted Successfull")
             window.location.reload()
-
         })
     })
 
@@ -131,43 +144,46 @@ window.onload = async () => {
             update(e.target.dataset.id)
         })
     })
-    
 }
-function enablebtn(e){
-    const id=e.target.dataset.id;
-    const btn=document.querySelector(`.update-${id}`);
-    try{
-        btn.disabled=false
-    }catch(err){
+function enablebtn(e) {
+    const id = e.target.dataset.id;
+    const btn = document.querySelector(`.update-${id}`);
+
+    try {
+        btn.disabled = false
+    }
+    catch (err) {
 
     }
 }
 
-async function update(id){
+async function update(id) {
 
-    const title1=document.querySelector(`.title-${id}`).innerHTML
-    const content=document.querySelector(`.content-${id}`).innerHTML
+    const title1 = document.querySelector(`.title-${id}`).innerHTML
+    const content = document.querySelector(`.content-${id}`).innerHTML
 
-    try{
-        const res = await fetch("/member/update", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({id:id,title:title1,content:content}),
-                credentials: 'include'
-            });
-            const data = await res.json();
+    try {
+        const res = await fetch(`/member/update/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id: id, title: title1, content: content }),
+            credentials: 'include'
+        });
 
-            if (res.status != 201) {
-                alert(data.message);
-                return;
-            }
-            alert("Updated!!!!")
-            document.querySelector(`.update-${id}`).disabled=true
-            window.location.reload()
+        const data = await res.json();
 
-    }catch(err){
+        if (res.status != 201) {
+            alert(data.message);
+            return;
+        }
+
+        alert("Updated!!!!")
+        document.querySelector(`.update-${id}`).disabled = true
+        window.location.reload()
+
+    } catch (err) {
         console.log(err)
     }
 }
