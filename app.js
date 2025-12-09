@@ -76,8 +76,8 @@ app.use('/member',auth, members);
 app.use('/admin', auth,roleCheck("admin"), admin)
 
 // this is for vercel if you want to run locally then un comment following
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 export default app;

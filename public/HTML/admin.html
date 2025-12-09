@@ -78,7 +78,7 @@
 
         main .container .users .user {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             gap: 150px;
         }
 
@@ -91,6 +91,16 @@
             flex-direction: column;
             gap: 15px;
             overflow-y: auto;
+        }
+        @media screen and (max-width: 768px) {
+            main .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            main .container .invite, main .container .users {
+                width: 80vw;
+            }
+            
         }
     </style>
 </head>

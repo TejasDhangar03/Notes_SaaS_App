@@ -25,7 +25,7 @@
             border: 2px solid rgb(184, 182, 182);
             border-radius: 10px;
             width: 25vw;
-            height: 55vh;
+            height: auto;
             margin: auto;
             display: flex;
             justify-content: center;
@@ -72,9 +72,24 @@
 
         @media screen and (max-width: 900px) {
             .container {
-                width: 80vw;
-                height: 50vh;
+                width: auto;
+                height: auto;
             }
+            .reg{
+                display: flex;
+                flex-direction: column;
+            }
+            .container {
+                width: auto;
+                height: auto;
+                
+            }
+            .in{
+                display:flex;
+                flex-direction: column;
+            }
+            
+         
         }
     </style>
 </head>
@@ -87,10 +102,10 @@
                 <label for="email">Enter Email : </label>
                 <input type="text" id="email" placeholder="Email">
             </div>
-            <div class="role in">
+            <div class="role ">
                 <label for="role">Select Role : </label>
                 <input type="radio" id="role" name="role" value="admin">
-                <label for="role">Admin</label><br>
+                <label for="role">Admin</label>
                 <input type="radio" id="role" name="role" value="member">
                 <label for="role">Member</label><br>
             </div>
